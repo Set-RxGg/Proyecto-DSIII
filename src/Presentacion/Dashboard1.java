@@ -37,7 +37,7 @@ public class Dashboard1 extends javax.swing.JFrame {
     }
     
     private void postInitComponents() {
-        // Añadir ChangeListener al tabbedPane
+        
         MainPanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -161,6 +161,11 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         InsertarButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         InsertarButton.setText("Insertar");
+        InsertarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertarButtonActionPerformed(evt);
+            }
+        });
 
         ActualizarButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ActualizarButton.setText("Actualizar");
@@ -354,6 +359,33 @@ public class Dashboard1 extends javax.swing.JFrame {
     private void MainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainPanelMouseClicked
         
     }//GEN-LAST:event_MainPanelMouseClicked
+
+    private void InsertarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarButtonActionPerformed
+        switch (obtenerPanelActual()) {
+            case "Operadores":
+                InsertarOperador1 window = new InsertarOperador1();
+                window.setVisible(true);
+                break;
+            case "Equipos":
+                
+                break;
+            case "Usuarios":
+                
+                break;
+            case "Carreras":
+                
+                break;
+            default:
+                
+                break;
+        }
+    }//GEN-LAST:event_InsertarButtonActionPerformed
+
+    public String obtenerPanelActual() {
+    int selectedIndex = MainPanel.getSelectedIndex();
+    String selectedPanel = MainPanel.getTitleAt(selectedIndex);
+    return selectedPanel;
+}
 
     private void cargarInformacion() {
     try {

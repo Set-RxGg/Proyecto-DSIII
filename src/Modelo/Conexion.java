@@ -49,16 +49,16 @@ public class Conexion {
             try {
                 if (!miConexion.isClosed()) {
                     miConexion.close();
-                    JOptionPane.showMessageDialog(null, "Base de datos cerrada exitosamente.");
+                    //JOptionPane.showMessageDialog(null, "Base de datos cerrada exitosamente.");
                     }
             } 
             catch (SQLException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al cerrar la conexión a la base de datos.");
+                    //JOptionPane.showMessageDialog(null, "Error al cerrar la conexión a la base de datos.");
             }
         }
         else {
-               JOptionPane.showMessageDialog(null, "No hay conexión abierta para cerrar.");
+               //JOptionPane.showMessageDialog(null, "No hay conexión abierta para cerrar.");
         }
     }
 }

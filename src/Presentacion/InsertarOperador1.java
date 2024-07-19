@@ -4,6 +4,13 @@
  */
 package Presentacion;
 
+import Logica.operadores;
+import Modelo.OperadoresDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 /**
  *
  * @author hp-laptop
@@ -40,14 +47,14 @@ public class InsertarOperador1 extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(340, 550));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Titulo.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo.setForeground(new java.awt.Color(0, 0, 0));
         Titulo.setText("Actualizar Operador");
 
-        etiqueta_Cedula.setForeground(new java.awt.Color(255, 255, 255));
+        etiqueta_Cedula.setForeground(new java.awt.Color(0, 0, 0));
         etiqueta_Cedula.setText("Cedula");
 
         Cedula.setBackground(new java.awt.Color(153, 153, 153));
-        Cedula.setForeground(new java.awt.Color(255, 255, 255));
+        Cedula.setForeground(new java.awt.Color(0, 0, 0));
         Cedula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,11 +62,11 @@ public class InsertarOperador1 extends javax.swing.JFrame {
             }
         });
 
-        etiqueta_Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        etiqueta_Nombre.setForeground(new java.awt.Color(0, 0, 0));
         etiqueta_Nombre.setText("Nombre");
 
         Nombre.setBackground(new java.awt.Color(153, 153, 153));
-        Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre.setForeground(new java.awt.Color(0, 0, 0));
         Nombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,11 +74,11 @@ public class InsertarOperador1 extends javax.swing.JFrame {
             }
         });
 
-        etiqueta_Apellido.setForeground(new java.awt.Color(255, 255, 255));
+        etiqueta_Apellido.setForeground(new java.awt.Color(0, 0, 0));
         etiqueta_Apellido.setText("Apellido");
 
         Apellido.setBackground(new java.awt.Color(153, 153, 153));
-        Apellido.setForeground(new java.awt.Color(255, 255, 255));
+        Apellido.setForeground(new java.awt.Color(0, 0, 0));
         Apellido.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,14 +87,24 @@ public class InsertarOperador1 extends javax.swing.JFrame {
         });
 
         Insertar.setBackground(new java.awt.Color(153, 153, 153));
-        Insertar.setForeground(new java.awt.Color(255, 255, 255));
+        Insertar.setForeground(new java.awt.Color(0, 0, 0));
         Insertar.setText("Insertar");
         Insertar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Insertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setBackground(new java.awt.Color(153, 153, 153));
-        Cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        Cancelar.setForeground(new java.awt.Color(0, 0, 0));
         Cancelar.setText("Cancelar");
         Cancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +154,7 @@ public class InsertarOperador1 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaActionPerformed
@@ -150,6 +168,38 @@ public class InsertarOperador1 extends javax.swing.JFrame {
     private void ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ApellidoActionPerformed
+
+    private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
+        String nombre, apellido, cedula;
+        nombre = Nombre.getText();
+        apellido = Apellido.getText();
+        cedula = Cedula.getText();
+        if(nombre.isBlank() || nombre.isEmpty() || apellido.isBlank() || apellido.isEmpty()||
+            cedula.isBlank() || cedula.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos.","ALERTA!!!", ERROR_MESSAGE);
+        }
+        else{
+            OperadoresDAO dao = new operadores();
+            operadores operador = new operadores();
+            operador.setCedula(cedula);
+            operador.setPrimer_apellido(apellido);
+            operador.setPrimer_nombre(nombre);
+            try {
+                dao.insertar(operador);
+                JOptionPane.showMessageDialog(null, "Operador ingresado correctamente.","AVISO!!!", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al ingresar el operador.","ALERTA!!!", ERROR_MESSAGE);
+            }
+        }
+        
+        Nombre.setText("");
+        Apellido.setText("");
+        Cedula.setText("");
+    }//GEN-LAST:event_InsertarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+       dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
