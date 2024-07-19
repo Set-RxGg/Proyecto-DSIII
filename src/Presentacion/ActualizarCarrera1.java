@@ -15,6 +15,7 @@ public class ActualizarCarrera1 extends javax.swing.JFrame {
      */
     public ActualizarCarrera1() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -36,15 +37,14 @@ public class ActualizarCarrera1 extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(340, 275));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Titulo.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo.setForeground(new java.awt.Color(0, 0, 0));
         Titulo.setText("Actualizar Carrera");
 
-        etiqueta_Equipo1.setForeground(new java.awt.Color(255, 255, 255));
+        etiqueta_Equipo1.setForeground(new java.awt.Color(0, 0, 0));
         etiqueta_Equipo1.setText("Nombre de la Carrera");
 
         Id_equipo1.setBackground(new java.awt.Color(153, 153, 153));
-        Id_equipo1.setForeground(new java.awt.Color(255, 255, 255));
-        Id_equipo1.setText("Nombre");
+        Id_equipo1.setForeground(new java.awt.Color(0, 0, 0));
         Id_equipo1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Id_equipo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,15 +52,20 @@ public class ActualizarCarrera1 extends javax.swing.JFrame {
             }
         });
 
-        Actualizar.setBackground(new java.awt.Color(153, 153, 153));
+        Actualizar.setBackground(new java.awt.Color(0, 0, 0));
         Actualizar.setForeground(new java.awt.Color(255, 255, 255));
         Actualizar.setText("Actualizar");
         Actualizar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        Cancelar.setBackground(new java.awt.Color(153, 153, 153));
+        Cancelar.setBackground(new java.awt.Color(0, 0, 0));
         Cancelar.setForeground(new java.awt.Color(255, 255, 255));
         Cancelar.setText("Cancelar");
         Cancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,6 +107,10 @@ public class ActualizarCarrera1 extends javax.swing.JFrame {
     private void Id_equipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Id_equipo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Id_equipo1ActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
