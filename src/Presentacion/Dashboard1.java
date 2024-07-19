@@ -197,7 +197,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Categoría", "Descripción", "Estado", "Modelo", "Placa Inventario", "Fecha compra", "Foto"
+                "ID", "Categoría", "Descripción", "Estado", "Modelo", "Placa Inventario", "Fecha compra"
             }
         ));
         jScrollPane2.setViewportView(jTable2);

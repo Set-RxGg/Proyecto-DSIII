@@ -55,6 +55,11 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
 
         LoginButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LoginButton.setText("INICIAR SESIÓN");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Correo");
 
@@ -104,6 +109,12 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
     private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CorreoActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        Dashboard1 window = new Dashboard1();
+        window.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
