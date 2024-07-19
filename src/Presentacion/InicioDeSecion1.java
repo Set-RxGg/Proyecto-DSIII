@@ -4,6 +4,9 @@
  */
 package Presentacion;
 
+import Modelo.Conexion;
+import javax.swing.JOptionPane;
+import java.sql.*;
 /**
  *
  * @author hp-laptop
@@ -30,10 +33,8 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         Correo = new javax.swing.JTextField();
-        Contrasena = new javax.swing.JPasswordField();
         LoginButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 350));
@@ -50,9 +51,6 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
             }
         });
 
-        Contrasena.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Contrasena.setForeground(new java.awt.Color(102, 102, 102));
-
         LoginButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LoginButton.setText("INICIAR SESIÓN");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +60,6 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Correo");
-
-        jLabel3.setText("Contraseña");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,9 +76,7 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(Correo)
-                                .addComponent(Contrasena)
-                                .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                            .addComponent(jLabel3))))
+                                .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,13 +88,9 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(3, 3, 3)
-                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(60, 60, 60)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,11 +101,37 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
     }//GEN-LAST:event_CorreoActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        String usuario;
+        usuario = Correo.getText();
+        
+        consultarUsuario(usuario);
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    public void consultarUsuario(String correo){
+    Conexion con = new Conexion();
+    
+    String correoG = null;
+    try{
+    Connection cn = con.abrirConexionSQL();
+    PreparedStatement st = cn.prepareCall("SELECT correo FROM usuarios");
+    ResultSet rs = st.executeQuery();
+    
+    if(rs.next()){
+        correoG = rs.getString(1);
+    }
+    if(correo.equals(correoG)){
+        JOptionPane.showMessageDialog(null,"Inicio de sesion exitoso", "AVISO!!!", JOptionPane.INFORMATION_MESSAGE);
         Dashboard1 window = new Dashboard1();
         window.setVisible(true);
         dispose();
-    }//GEN-LAST:event_LoginButtonActionPerformed
-
+    }else if(!correo.equals(correoG)){
+        JOptionPane.showMessageDialog(null,"Correo incorrecto", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+    }
+    }catch(Exception E){
+    
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -153,11 +169,9 @@ public class InicioDeSecion1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField Contrasena;
     private javax.swing.JTextField Correo;
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,27 +27,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="Actualizar" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Cancelar" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="etiqueta_Equipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Titulo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="EquipoText" alignment="0" max="32767" attributes="0"/>
-                          <Component id="etiqueta_Estado" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Categoria" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Estado" alignment="0" max="32767" attributes="0"/>
-                          <Component id="Categoría" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="etiqueta_Equipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Titulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="etiqueta_Estado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Categoria" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Categoría" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EquipoText" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Estado" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jDateChooser1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <EmptySpace pref="64" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,12 +64,14 @@
               <Component id="etiqueta_Estado" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Estado" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="jDateChooser1" min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Actualizar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="Cancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -183,6 +181,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
   </SubComponents>
 </Form>

@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
 /**
  *
  * @author hp-laptop
@@ -16,7 +20,23 @@ public class Dashboard1 extends javax.swing.JFrame {
     public Dashboard1() {
         initComponents();
         this.setLocationRelativeTo(null);
+        manejarCambioDePestaña(MainPanel, Filtrar, Ordenar, EquiposPanel, CarrerasPanel);
     }
+    
+    private void manejarCambioDePestaña(JTabbedPane tabbedPane, JComboBox<String> comboBoxFiltrar, JComboBox<String> comboBoxOrdenar, JPanel equiposPanel, JPanel carrerasPanel) {
+    tabbedPane.addChangeListener(e -> {
+        int indiceSeleccionado = tabbedPane.getSelectedIndex();
+        if (indiceSeleccionado == tabbedPane.indexOfComponent(EquiposPanel) ||
+            indiceSeleccionado == tabbedPane.indexOfComponent(CarrerasPanel)) {
+            comboBoxFiltrar.setVisible(false);
+            comboBoxOrdenar.setVisible(false);
+        } else {
+            comboBoxFiltrar.setVisible(true);
+            comboBoxOrdenar.setVisible(true);
+        }
+    });
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +57,7 @@ public class Dashboard1 extends javax.swing.JFrame {
         ActualizarButton = new javax.swing.JButton();
         EliminarButton = new javax.swing.JButton();
         Filtrar = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Ordenar = new javax.swing.JComboBox<>();
         MainPanel = new javax.swing.JTabbedPane();
         OperadoresPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -134,7 +154,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "ASC", "DESC", " " }));
+        Ordenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar", "ASC", "DESC", " " }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,7 +164,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(EliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -158,7 +178,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1)
+                    .addComponent(Ordenar)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(InsertarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ActualizarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,6 +188,11 @@ public class Dashboard1 extends javax.swing.JFrame {
         );
 
         MainPanel.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        MainPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MainPanelMouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,10 +312,6 @@ public class Dashboard1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FiltrarActionPerformed
-
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed
@@ -304,6 +325,14 @@ public class Dashboard1 extends javax.swing.JFrame {
         Importar1 importar = new Importar1();
         importar.setVisible(true);
     }//GEN-LAST:event_ImportarButtonActionPerformed
+
+    private void FiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FiltrarActionPerformed
+
+    private void MainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainPanelMouseClicked
+        
+    }//GEN-LAST:event_MainPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -353,9 +382,9 @@ public class Dashboard1 extends javax.swing.JFrame {
     private javax.swing.JButton InsertarButton;
     private javax.swing.JTabbedPane MainPanel;
     private javax.swing.JPanel OperadoresPanel;
+    private javax.swing.JComboBox<String> Ordenar;
     private javax.swing.JButton SalirButton;
     private javax.swing.JPanel UsuariosPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
