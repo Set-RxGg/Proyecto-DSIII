@@ -169,6 +169,11 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         ActualizarButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ActualizarButton.setText("Actualizar");
+        ActualizarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarButtonActionPerformed(evt);
+            }
+        });
 
         EliminarButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EliminarButton.setText("Eliminar");
@@ -367,19 +372,46 @@ public class Dashboard1 extends javax.swing.JFrame {
                 window.setVisible(true);
                 break;
             case "Equipos":
-                
+                InsertarEquipo1 window1 = new InsertarEquipo1();
+                window1.setVisible(true);
                 break;
             case "Usuarios":
-                
+                 InsertarUsuario1 window2 = new InsertarUsuario1();
+                window2.setVisible(true);
                 break;
             case "Carreras":
-                
+                InsertarCarrera1 window3 = new InsertarCarrera1();
+                window3.setVisible(true);
                 break;
             default:
                 
                 break;
         }
     }//GEN-LAST:event_InsertarButtonActionPerformed
+
+    private void ActualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtonActionPerformed
+      switch (obtenerPanelActual()) {
+            case "Operadores":
+                ActualizarOperadores1 window = new ActualizarOperadores1();
+                window.setVisible(true);
+                break;
+            case "Equipos":
+                ActualizarEquipo1 window1 = new ActualizarEquipo1();
+                window1.setVisible(true);
+                break;
+            case "Usuarios":
+                 ActualizarUsuario1 window2 = new ActualizarUsuario1();
+                window2.setVisible(true);
+                break;
+            case "Carreras":
+                ActualizarCarrera1 window3 = new ActualizarCarrera1();
+                window3.setVisible(true);
+                break;
+            default:
+                
+                break;
+        }
+    }//GEN-LAST:event_ActualizarButtonActionPerformed
 
     public String obtenerPanelActual() {
     int selectedIndex = MainPanel.getSelectedIndex();
