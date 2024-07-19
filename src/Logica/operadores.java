@@ -41,7 +41,7 @@ public class operadores extends Conexion implements OperadoresDAO {
         this.cedula = cedula;
     }
 
-    @Override
+     @Override
     public void insertar(operadores operador) throws Exception {
         try {
             this.abrirConexionSQL();
@@ -52,7 +52,7 @@ public class operadores extends Conexion implements OperadoresDAO {
             st.setString(3, operador.getCedula());
             st.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Error al insertar el operador", e);
         } finally {
             this.cerrarConexionSQL();
         }
@@ -69,7 +69,7 @@ public class operadores extends Conexion implements OperadoresDAO {
             st.setString(3, operador.getCedula());
             st.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Error al modificar el operador", e);
         } finally {
             this.cerrarConexionSQL();
         }
@@ -91,7 +91,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 operador.setCedula(rs.getString("cedula"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           throw new Exception("Error al consultar el operador", e);
         } finally {
             this.cerrarConexionSQL();
         }
@@ -107,7 +107,7 @@ public class operadores extends Conexion implements OperadoresDAO {
             st.setLong(1, cedula);
             st.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Error al eliminar el operador", e);
         } finally {
             this.cerrarConexionSQL();
         }
@@ -129,7 +129,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 listaOperadores.add(operador);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Error al mostrar el operador", e);
         } finally {
             this.cerrarConexionSQL();
         }
@@ -153,7 +153,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 listaOperadores.add(operador);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Error", e);
         } finally {
             this.cerrarConexionSQL();
         }
