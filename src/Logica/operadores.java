@@ -15,7 +15,7 @@ import java.util.List;
 public class operadores extends Conexion implements OperadoresDAO {
     private String primer_nombre;
     private String primer_apellido;
-    private Long cedula;
+    private String cedula;
 
     public String getPrimer_nombre() {
         return primer_nombre;
@@ -33,11 +33,11 @@ public class operadores extends Conexion implements OperadoresDAO {
         this.primer_apellido = primer_apellido;
     }
 
-    public Long getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(Long cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
@@ -49,7 +49,7 @@ public class operadores extends Conexion implements OperadoresDAO {
             PreparedStatement st = this.miConexion.prepareStatement(sql);
             st.setString(1, operador.getPrimer_nombre());
             st.setString(2, operador.getPrimer_apellido());
-            st.setLong(3, operador.getCedula());
+            st.setString(3, operador.getCedula());
             st.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class operadores extends Conexion implements OperadoresDAO {
             PreparedStatement st = this.miConexion.prepareStatement(sql);
             st.setString(1, operador.getPrimer_nombre());
             st.setString(2, operador.getPrimer_apellido());
-            st.setLong(3, operador.getCedula());
+            st.setString(3, operador.getCedula());
             st.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 operador = new operadores();
                 operador.setPrimer_nombre(rs.getString("primer_nombre"));
                 operador.setPrimer_apellido(rs.getString("primer_apellido"));
-                operador.setCedula(rs.getLong("cedula"));
+                operador.setCedula(rs.getString("cedula"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 operadores operador = new operadores();
                 operador.setPrimer_nombre(rs.getString("primer_nombre"));
                 operador.setPrimer_apellido(rs.getString("primer_apellido"));
-                operador.setCedula(rs.getLong("cedula"));
+                operador.setCedula(rs.getString("cedula"));
                 listaOperadores.add(operador);
             }
         } catch (Exception e) {
@@ -149,7 +149,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 operadores operador = new operadores();
                 operador.setPrimer_nombre(rs.getString("primer_nombre"));
                 operador.setPrimer_apellido(rs.getString("primer_apellido"));
-                operador.setCedula(rs.getLong("cedula"));
+                operador.setCedula(rs.getString("cedula"));
                 listaOperadores.add(operador);
             }
         } catch (Exception e) {
@@ -184,7 +184,7 @@ public class operadores extends Conexion implements OperadoresDAO {
                 operadores operador = new operadores();
                 operador.setPrimer_nombre(rs.getString("primer_nombre"));
                 operador.setPrimer_apellido(rs.getString("primer_apellido"));
-                operador.setCedula(rs.getLong("cedula"));
+                operador.setCedula(rs.getString("cedula"));
                 listaOperadores.add(operador);
             }
         } catch (Exception e) {

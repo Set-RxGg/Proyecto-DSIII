@@ -4,9 +4,21 @@
  */
 package Presentacion;
 
+import Logica.Carreras;
+import Logica.Usuario;
+import Logica.equipos;
+import Logica.operadores;
+import Modelo.CarrerasDAO;
+import Modelo.EquiposDAO;
+import Modelo.OperadoresDAO;
+import Modelo.UsuariosDAO;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,8 +33,18 @@ public class Dashboard1 extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         manejarCambioDePestaña(MainPanel, Filtrar, Ordenar, EquiposPanel, CarrerasPanel);
+        postInitComponents();
     }
     
+    private void postInitComponents() {
+        // Añadir ChangeListener al tabbedPane
+        MainPanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                cargarInformacion();
+            }
+        });
+    }
     private void manejarCambioDePestaña(JTabbedPane tabbedPane, JComboBox<String> comboBoxFiltrar, JComboBox<String> comboBoxOrdenar, JPanel equiposPanel, JPanel carrerasPanel) {
     tabbedPane.addChangeListener(e -> {
         int indiceSeleccionado = tabbedPane.getSelectedIndex();
@@ -36,7 +58,6 @@ public class Dashboard1 extends javax.swing.JFrame {
         }
     });
 }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,16 +82,16 @@ public class Dashboard1 extends javax.swing.JFrame {
         MainPanel = new javax.swing.JTabbedPane();
         OperadoresPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        OperadoresT = new javax.swing.JTable();
         EquiposPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        EquiposT = new javax.swing.JTable();
         UsuariosPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        UsuariosT = new javax.swing.JTable();
         CarrerasPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        CarrerasT = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -194,7 +215,7 @@ public class Dashboard1 extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        OperadoresT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -202,7 +223,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 "Cédula", "Nombre", "Apellido"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(OperadoresT);
 
         javax.swing.GroupLayout OperadoresPanelLayout = new javax.swing.GroupLayout(OperadoresPanel);
         OperadoresPanel.setLayout(OperadoresPanelLayout);
@@ -217,7 +238,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         MainPanel.addTab("Operadores", OperadoresPanel);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        EquiposT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -225,7 +246,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 "ID", "Categoría", "Descripción", "Estado", "Modelo", "Placa Inventario", "Fecha compra"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(EquiposT);
 
         javax.swing.GroupLayout EquiposPanelLayout = new javax.swing.GroupLayout(EquiposPanel);
         EquiposPanel.setLayout(EquiposPanelLayout);
@@ -240,7 +261,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         MainPanel.addTab("Equipos", EquiposPanel);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        UsuariosT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -248,7 +269,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 "Cédula", "Nombre", "Apellido", "Teléfono", "Correo", "Tipo de usuario", "Carrera"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(UsuariosT);
 
         javax.swing.GroupLayout UsuariosPanelLayout = new javax.swing.GroupLayout(UsuariosPanel);
         UsuariosPanel.setLayout(UsuariosPanelLayout);
@@ -263,7 +284,7 @@ public class Dashboard1 extends javax.swing.JFrame {
 
         MainPanel.addTab("Usuarios", UsuariosPanel);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        CarrerasT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -271,7 +292,7 @@ public class Dashboard1 extends javax.swing.JFrame {
                 "ID", "Nombre"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(CarrerasT);
 
         javax.swing.GroupLayout CarrerasPanelLayout = new javax.swing.GroupLayout(CarrerasPanel);
         CarrerasPanel.setLayout(CarrerasPanelLayout);
@@ -334,6 +355,84 @@ public class Dashboard1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_MainPanelMouseClicked
 
+    private void cargarInformacion() {
+    try {
+        int indiceSeleccionado = MainPanel.getSelectedIndex();
+        switch (indiceSeleccionado) {
+            case 0: // OperadoresPanel
+                cargarInformacionOperadores();
+                break;
+            case 1: // EquiposPanel
+                cargarInformacionEquipos();
+                break;
+            case 2: // UsuariosPanel
+                cargarInformacionUsuarios();
+                break;
+            case 3: // CarrerasPanel
+                cargarInformacionCarreras();
+                break;
+            default:
+                // Maneja el caso por defecto si es necesario
+                break;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+private void cargarInformacionCarreras() throws Exception {
+    DefaultTableModel model = (DefaultTableModel) CarrerasT.getModel();
+    model.setRowCount(0); // Limpia las filas existentes
+    CarrerasDAO DAO = new Carreras();
+    List<Carreras> listaCarreras = DAO.mostrar(); 
+    listaCarreras.forEach(c -> model.addRow(new Object[]{c.getIdcarrera(), c.getNombre_carrera()}));
+}
+
+private void cargarInformacionUsuarios() throws Exception {
+    DefaultTableModel model = (DefaultTableModel) UsuariosT.getModel();
+    model.setRowCount(0); // Limpia las filas existentes
+    UsuariosDAO DAO = new Usuario(); 
+    List<Usuario> listaUsuarios = DAO.mostrar(); // Asume que obtienes la lista de usuarios
+    listaUsuarios.forEach(u -> model.addRow(new Object[]{
+        u.getCedula(),
+        u.getPrimer_nombre(),
+        u.getPrimer_apellido(),
+        u.getTelefono(),
+        u.getCorreo(),
+        u.getTipousuario(),
+        u.getIdcarrera()
+    }));
+}
+
+private void cargarInformacionEquipos() throws Exception {
+    DefaultTableModel model = (DefaultTableModel) EquiposT.getModel();
+    model.setRowCount(0); // Limpia las filas existentes
+    EquiposDAO DAO = new equipos();
+    List<equipos> listaEquipos = DAO.mostrar(); // Asume que obtienes la lista de equipos
+    listaEquipos.forEach(e -> model.addRow(new Object[]{
+        e.getIdequipo(),
+        e.getIdcategoria(),
+        e.getDescripcion(),
+        e.getIdestado_equipo(),
+        e.getModelo(),
+        e.getPlaca_inventario(),
+        e.getFecha_compra()
+    }));
+}
+
+private void cargarInformacionOperadores() throws Exception {
+    DefaultTableModel model = (DefaultTableModel) OperadoresT.getModel();
+    model.setRowCount(0); // Limpia las filas existentes
+    OperadoresDAO DAO = new operadores();
+    List<operadores> listaOperadores = DAO.mostrar(); // Asume que obtienes la lista de operadores
+    listaOperadores.forEach(o -> model.addRow(new Object[]{
+        o.getCedula(),
+        o.getPrimer_nombre(),
+        o.getPrimer_apellido()
+    }));
+}
+
+    
     /**
      * @param args the command line arguments
      */
@@ -374,26 +473,26 @@ public class Dashboard1 extends javax.swing.JFrame {
     private javax.swing.JButton ActualizarButton;
     private javax.swing.JLabel CPANEL;
     private javax.swing.JPanel CarrerasPanel;
+    private javax.swing.JTable CarrerasT;
     private javax.swing.JButton EliminarButton;
     private javax.swing.JPanel EquiposPanel;
+    private javax.swing.JTable EquiposT;
     private javax.swing.JButton ExportarButton;
     private javax.swing.JComboBox<String> Filtrar;
     private javax.swing.JButton ImportarButton;
     private javax.swing.JButton InsertarButton;
     private javax.swing.JTabbedPane MainPanel;
     private javax.swing.JPanel OperadoresPanel;
+    private javax.swing.JTable OperadoresT;
     private javax.swing.JComboBox<String> Ordenar;
     private javax.swing.JButton SalirButton;
     private javax.swing.JPanel UsuariosPanel;
+    private javax.swing.JTable UsuariosT;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 }

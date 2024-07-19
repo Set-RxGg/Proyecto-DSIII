@@ -30,16 +30,16 @@ public class Conexion {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
     } catch (ClassNotFoundException e) {
         JOptionPane.showMessageDialog(null, "Error al cargar el driver JDBC", "AVISO!!!", JOptionPane.ERROR_MESSAGE);
-        return null; // Salir del método si ocurre un error
+        return null; 
     }
 
     try {
         miConexion = (Connection) DriverManager.getConnection(this.url, this.usuario, this.contrasena);
         this.miStatement = miConexion.createStatement();
-        JOptionPane.showMessageDialog(null, "Se ha conectado exitosamente con la base de datos", "ALERTA", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Se ha conectado exitosamente con la base de datos", "ALERTA", JOptionPane.INFORMATION_MESSAGE);
         return miConexion;
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "AVISO!!!", JOptionPane.ERROR_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "AVISO!!!", JOptionPane.ERROR_MESSAGE);
         return null;
     }
 }
@@ -49,7 +49,7 @@ public class Conexion {
             try {
                 if (!miConexion.isClosed()) {
                     miConexion.close();
-                    JOptionPane.showMessageDialog(null, "Conexión a la base de datos cerrada exitosamente.");
+                    JOptionPane.showMessageDialog(null, "Base de datos cerrada exitosamente.");
                     }
             } 
             catch (SQLException e) {
