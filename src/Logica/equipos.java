@@ -177,32 +177,34 @@ public class equipos extends Conexion implements EquiposDAO {
     }
 
     @Override
-    public List<equipos> mostrar() throws Exception {
-        List<equipos> listaEquipos = new ArrayList<>();
-        try {
-            this.abrirConexionSQL();
-            String sql = "SELECT * FROM equipos";
-            PreparedStatement st = this.miConexion.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                equipos equipo = new equipos();
-                equipo.setModelo(rs.getString("modelo"));
-                equipo.setPlaca_inventario(rs.getString("placa_inventario"));
-                equipo.setDescripcion(rs.getString("descripcion"));
-                equipo.setFoto(rs.getString("foto"));
-                equipo.setIdequipo(rs.getInt("idequipo"));
-                equipo.setFecha_compra(rs.getString("fecha_compra"));
-                equipo.setIdcategoria(rs.getInt("idcategoria"));
-                equipo.setIdestado_equipo(rs.getInt("idestado_equipo"));
-                listaEquipos.add(equipo);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            this.cerrarConexionSQL();
+public List<equipos> mostrar() throws Exception {
+    List<equipos> listaEquipos = new ArrayList<>();
+    try {
+        this.abrirConexionSQL();
+        String sql = "SELECT * FROM equipos";
+        PreparedStatement st = this.miConexion.prepareStatement(sql);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            equipos equipo = new equipos();
+            equipo.setModelo(rs.getString("modelo"));
+            equipo.setPlaca_inventario(rs.getString("placa_inventario"));
+            equipo.setDescripcion(rs.getString("descripcion"));
+            equipo.setFoto(rs.getString("foto"));
+            equipo.setIdequipo(rs.getInt("idequipo"));
+            equipo.setFecha_compra(rs.getString("fecha_compra"));
+            equipo.setIdcategoria(rs.getInt("idcategoria"));
+            equipo.setIdestado_equipo(rs.getInt("idestado_equipo"));
+            listaEquipos.add(equipo);
         }
-        return listaEquipos;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new Exception("Error al mostrar los equipos", e);
+    } finally {
+        this.cerrarConexionSQL();
     }
+    return listaEquipos;
+}
+
 
     @Override
     public List<equipos> ordenar(boolean ascendente) throws Exception {

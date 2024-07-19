@@ -83,7 +83,7 @@ public class Usuario extends Conexion implements UsuariosDAO {
     
     
     
-    @Override
+     @Override
     public void insertar(Usuario usuario) throws Exception {
         try {
             this.abrirConexionSQL();
@@ -98,7 +98,7 @@ public class Usuario extends Conexion implements UsuariosDAO {
             st.setString(7, usuario.getTipousuario());
             st.executeUpdate();
         } catch (Exception e) {
-            //
+            e.printStackTrace();
         } finally {
             this.cerrarConexionSQL();
         }
@@ -155,7 +155,7 @@ public class Usuario extends Conexion implements UsuariosDAO {
 
     @Override
     public void eliminar(int cedula) throws Exception {
-         try {
+        try {
             this.abrirConexionSQL();
             String sql = "DELETE FROM usuarios WHERE cedula = ?";
             PreparedStatement st = this.miConexion.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class Usuario extends Conexion implements UsuariosDAO {
 
     @Override
     public List<Usuario> mostrar() throws Exception {
-       List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Usuario> listaUsuarios = new ArrayList<>();
         try {
             this.abrirConexionSQL();
             String sql = "SELECT * FROM usuarios";
@@ -188,7 +188,7 @@ public class Usuario extends Conexion implements UsuariosDAO {
                 listaUsuarios.add(usuario);
             }
         } catch (Exception e) {
-            //
+            e.printStackTrace();
         } finally {
             this.cerrarConexionSQL();
         }
