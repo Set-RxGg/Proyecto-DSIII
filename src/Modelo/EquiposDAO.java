@@ -4,17 +4,20 @@
  */
 package Modelo;
 
+import Logica.equipos;
+import java.util.List;
+
 /**
  *
  * @author roder
  */
 public interface EquiposDAO {
-    public void insertar(Equipo equipo) throws Exception;
-    public void modificar(Equipo equipo) throws Exception;
-    public Equipo consultar(String id) throws Exception;
-    public void eliminar(String id) throws Exception;
-    public List<Equipo> mostrar() throws Exception;
-    public List<Equipo> ordenar(boolean ascendente) throws Exception;
-    public List<Equipo> buscar(TipoBusqueda tipoBusqueda, String filtro) throws Exception;
+    public void insertar(equipos equipo) throws Exception;
+    public void modificar(equipos equipo) throws Exception;
+    public equipos consultar(int id) throws Exception;
+    public void eliminar(int id) throws Exception;
+    public List<equipos> mostrar() throws Exception;
+    public List<equipos> ordenar(boolean ascendente) throws Exception;
+    public List<equipos> buscar(TipoBusqueda tipoBusqueda, String filtro) throws Exception;
 }
-}
+

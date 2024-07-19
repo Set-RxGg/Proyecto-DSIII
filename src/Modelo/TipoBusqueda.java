@@ -11,5 +11,10 @@ package Modelo;
 public enum TipoBusqueda {
     PRIMER_NOMBRE, 
     PRIMER_APELLIDO, 
-    CEDULA;
+    CEDULA,
+    NOMBRE_CARRERA,
+    IDCARRERA,
+    MODELO,
+    PLACA_INVENTARIO,
+    DESCRIPCION;
 }

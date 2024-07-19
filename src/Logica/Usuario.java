@@ -154,12 +154,12 @@ public class Usuario extends Conexion implements UsuariosDAO {
     }
 
     @Override
-    public void eliminar(String cedula) throws Exception {
+    public void eliminar(int cedula) throws Exception {
          try {
             this.abrirConexionSQL();
             String sql = "DELETE FROM usuarios WHERE cedula = ?";
             PreparedStatement st = this.miConexion.prepareStatement(sql);
-            st.setString(1, cedula);
+            st.setInt(1, cedula);
             st.executeUpdate();
         } catch (Exception e) {
             throw e;
